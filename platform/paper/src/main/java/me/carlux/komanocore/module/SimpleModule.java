@@ -1,12 +1,15 @@
 package me.carlux.komanocore.module;
 
-import co.aikar.commands.BaseCommand;
 import co.aikar.commands.BukkitCommandCompletionContext;
 import co.aikar.commands.CommandCompletions;
+import co.aikar.commands.PaperCommandManager;
 import lombok.RequiredArgsConstructor;
 import me.carlux.komanocore.PaperPlugin;
 import me.carlux.komanocore.api.module.Module;
+import me.carlux.komanocore.command.PluginCommand;
+import me.carlux.komanocore.completion.PluginCommandCompletion;
 
+import java.util.Collection;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -16,15 +19,21 @@ public abstract class SimpleModule implements Module {
 
     @Override
     public void onEnable() {
-        this.getCommands()
-            .forEach(command -> this.plugin.getCommandManager().registerCommand(command));
-        this.registerCommandCompletions(this.plugin.getCommandManager().getCommandCompletions());
+        final PaperCommandManager commandManager = this.plugin.getCommandManager();
+        this.getCommands().forEach(commandManager::registerCommand);
+
+        final CommandCompletions<BukkitCommandCompletionContext> commandCompletions = commandManager.getCommandCompletions();
+        this.getCommandCompletions().forEach(completion -> {
+            commandCompletions.registerAsyncCompletion(completion.getId(), completion::handle);
+        });
     }
 
-    public List<BaseCommand> getCommands() {
+    public Collection<PluginCommand> getCommands() {
         return List.of();
     }
 
-    public void registerCommandCompletions(CommandCompletions<BukkitCommandCompletionContext> completions) {}
+    public Collection<PluginCommandCompletion> getCommandCompletions() {
+        return List.of();
+    }
 
 }

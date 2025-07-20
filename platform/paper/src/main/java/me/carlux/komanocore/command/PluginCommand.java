@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 
-public class PluginBaseCommand extends BaseCommand {
+public class PluginCommand extends BaseCommand {
 
     private final static String LINE = "--------------------------------------------------";
     protected final static Component START_BLUE_LINE = Component

@@ -7,7 +7,7 @@ import co.aikar.commands.annotation.Syntax;
 import lombok.RequiredArgsConstructor;
 import me.carlux.komanocore.api.waypoint.Waypoint;
 import me.carlux.komanocore.api.waypoint.WaypointRepository;
-import me.carlux.komanocore.command.PluginBaseCommand;
+import me.carlux.komanocore.command.PluginCommand;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -21,7 +21,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @CommandAlias("waypoint")
-public class WaypointCreateCommand extends PluginBaseCommand {
+public class WaypointCreateCommand extends PluginCommand {
 
     private final WaypointRepository repository;
 

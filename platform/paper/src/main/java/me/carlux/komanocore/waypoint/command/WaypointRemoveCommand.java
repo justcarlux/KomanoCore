@@ -3,7 +3,7 @@ package me.carlux.komanocore.waypoint.command;
 import co.aikar.commands.annotation.*;
 import lombok.RequiredArgsConstructor;
 import me.carlux.komanocore.api.waypoint.WaypointRepository;
-import me.carlux.komanocore.command.PluginBaseCommand;
+import me.carlux.komanocore.command.PluginCommand;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.CommandSender;
@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 
 @RequiredArgsConstructor
 @CommandAlias("waypoint")
-public class WaypointRemoveCommand extends PluginBaseCommand {
+public class WaypointRemoveCommand extends PluginCommand {
 
     private final WaypointRepository repository;
 

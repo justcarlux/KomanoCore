@@ -1,18 +1,17 @@
 package me.carlux.komanocore.waypoint;
 
-import co.aikar.commands.BaseCommand;
-import co.aikar.commands.BukkitCommandCompletionContext;
-import co.aikar.commands.CommandCompletions;
 import me.carlux.komanocore.PaperPlugin;
 import me.carlux.komanocore.api.waypoint.WaypointRepository;
 import me.carlux.komanocore.api.waypoint.track.WaypointTrackController;
+import me.carlux.komanocore.command.PluginCommand;
+import me.carlux.komanocore.completion.PluginCommandCompletion;
 import me.carlux.komanocore.module.SimpleModule;
 import me.carlux.komanocore.waypoint.command.*;
+import me.carlux.komanocore.waypoint.completion.ListWaypointsCompletion;
 import me.carlux.komanocore.waypoint.track.WaypointTrackControllerImpl;
 
+import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 public class WaypointModule extends SimpleModule {
 
@@ -36,7 +35,7 @@ public class WaypointModule extends SimpleModule {
     }
 
     @Override
-    public List<BaseCommand> getCommands() {
+    public Collection<PluginCommand> getCommands() {
         return List.of(
             new WaypointCreateCommand(this.repository),
             new WaypointRemoveCommand(this.repository),
@@ -47,12 +46,10 @@ public class WaypointModule extends SimpleModule {
     }
 
     @Override
-    public void registerCommandCompletions(CommandCompletions<BukkitCommandCompletionContext> completions) {
-        completions.registerAsyncCompletion("listwaypoints", (context -> {
-            final Optional<Map<String, Boolean>> cachedNames = this.repository.findCachedNamesByOwner(context.getPlayer().getUniqueId());
-            if (cachedNames.isEmpty()) return List.of();
-            return cachedNames.get().keySet();
-        }));
+    public Collection<PluginCommandCompletion> getCommandCompletions() {
+        return List.of(
+            new ListWaypointsCompletion(this.repository)
+        );
     }
 
 }

@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import me.carlux.komanocore.api.repository.ModelWithId;
 import me.carlux.komanocore.api.waypoint.Waypoint;
 import me.carlux.komanocore.api.waypoint.WaypointRepository;
-import me.carlux.komanocore.command.PluginBaseCommand;
+import me.carlux.komanocore.command.PluginCommand;
 import me.carlux.komanocore.util.Format;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -23,7 +23,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @CommandAlias("waypoint")
-public class WaypointListCommand extends PluginBaseCommand {
+public class WaypointListCommand extends PluginCommand {
 
     private final WaypointRepository repository;
 

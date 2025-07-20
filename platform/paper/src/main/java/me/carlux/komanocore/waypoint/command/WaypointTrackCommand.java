@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import me.carlux.komanocore.api.waypoint.WaypointRepository;
 import me.carlux.komanocore.api.waypoint.track.WaypointTrackController;
 import me.carlux.komanocore.api.waypoint.exception.TrackNullWorldWaypointException;
-import me.carlux.komanocore.command.PluginBaseCommand;
+import me.carlux.komanocore.command.PluginCommand;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 
 @RequiredArgsConstructor
 @CommandAlias("waypoint")
-public class WaypointTrackCommand extends PluginBaseCommand {
+public class WaypointTrackCommand extends PluginCommand {
 
     private final WaypointRepository repository;
     private final WaypointTrackController trackController;

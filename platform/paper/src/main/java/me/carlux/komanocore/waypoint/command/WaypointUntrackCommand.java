@@ -6,7 +6,7 @@ import co.aikar.commands.annotation.Subcommand;
 import lombok.RequiredArgsConstructor;
 import me.carlux.komanocore.api.waypoint.track.WaypointTrackController;
 import me.carlux.komanocore.api.waypoint.track.WaypointTrackEntry;
-import me.carlux.komanocore.command.PluginBaseCommand;
+import me.carlux.komanocore.command.PluginCommand;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.CommandSender;
@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 
 @RequiredArgsConstructor
 @CommandAlias("waypoint")
-public class WaypointUntrackCommand extends PluginBaseCommand {
+public class WaypointUntrackCommand extends PluginCommand {
 
     private final WaypointTrackController trackController;
 
