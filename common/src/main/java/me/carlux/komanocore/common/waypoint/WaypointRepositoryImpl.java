@@ -35,7 +35,7 @@ public class WaypointRepositoryImpl extends SimpleRepository<Long, Waypoint> imp
             "y DOUBLE NOT NULL, " +
             "z DOUBLE NOT NULL" +
             ")";
-        try (final Connection connection = dataSource.getConnection();
+        try (final Connection connection = this.dataSource.getConnection();
              final Statement statement = connection.createStatement()) {
             statement.execute(sql);
         }
@@ -60,7 +60,7 @@ public class WaypointRepositoryImpl extends SimpleRepository<Long, Waypoint> imp
     public CompletableFuture<List<ModelWithId<Long, Waypoint>>> findByOwner(UUID owner) {
         return CompletableFuture.supplyAsync(() -> {
             final String sql = "SELECT id, name, owner, worldName, x, y, z FROM waypoints WHERE owner = ?";
-            try (final Connection connection = dataSource.getConnection();
+            try (final Connection connection = this.dataSource.getConnection();
                  final PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, owner.toString());
                 try (final ResultSet resultSet = statement.executeQuery()) {
@@ -80,7 +80,7 @@ public class WaypointRepositoryImpl extends SimpleRepository<Long, Waypoint> imp
     public CompletableFuture<Optional<ModelWithId<Long, Waypoint>>> searchByOwner(UUID owner, String name) {
         return CompletableFuture.supplyAsync(() -> {
             final String sql = "SELECT id, name, owner, worldName, x, y, z FROM waypoints WHERE owner = ? AND name = ?";
-            try (final Connection connection = dataSource.getConnection();
+            try (final Connection connection = this.dataSource.getConnection();
                  final PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, owner.toString());
                 statement.setString(2, name);
@@ -105,7 +105,7 @@ public class WaypointRepositoryImpl extends SimpleRepository<Long, Waypoint> imp
     public CompletableFuture<Optional<ModelWithId<Long, Waypoint>>> findById(Long id) {
         return CompletableFuture.supplyAsync(() -> {
             final String sql = "SELECT id, name, owner, worldName, x, y, z FROM waypoints WHERE id = ?";
-            try (final Connection connection = dataSource.getConnection();
+            try (final Connection connection = this.dataSource.getConnection();
                  final PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setLong(1, id);
                 try (final ResultSet resultSet = statement.executeQuery()) {
@@ -124,7 +124,7 @@ public class WaypointRepositoryImpl extends SimpleRepository<Long, Waypoint> imp
     public CompletableFuture<List<ModelWithId<Long, Waypoint>>> findAll() {
         return CompletableFuture.supplyAsync(() -> {
             final String sql = "SELECT id, name, owner, worldName, x, y, z FROM waypoints";
-            try (final Connection connection = dataSource.getConnection();
+            try (final Connection connection = this.dataSource.getConnection();
                  final Statement statement = connection.createStatement();
                  final ResultSet resultSet = statement.executeQuery(sql)) {
                 final List<ModelWithId<Long, Waypoint>> waypoints = new ArrayList<>();
@@ -156,7 +156,7 @@ public class WaypointRepositoryImpl extends SimpleRepository<Long, Waypoint> imp
     public CompletableFuture<Long> save(Waypoint model) {
         return CompletableFuture.supplyAsync(() -> {
             final String sql = "INSERT INTO waypoints (name, owner, worldName, x, y, z) VALUES (?, ?, ?, ?, ?, ?)";
-            try (final Connection connection = dataSource.getConnection();
+            try (final Connection connection = this.dataSource.getConnection();
                  final PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 statement.setString(1, model.name());
                 statement.setString(2, model.owner().toString());
@@ -182,7 +182,7 @@ public class WaypointRepositoryImpl extends SimpleRepository<Long, Waypoint> imp
     public CompletableFuture<Boolean> delete(ModelWithId<Long, Waypoint> waypoint) {
         return CompletableFuture.supplyAsync(() -> {
             final String sql = "DELETE FROM waypoints WHERE id = ?";
-            try (final Connection conn = dataSource.getConnection();
+            try (final Connection conn = this.dataSource.getConnection();
                  final PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setLong(1, waypoint.id());
                 this.uncacheName(waypoint.model());

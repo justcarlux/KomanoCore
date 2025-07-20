@@ -22,7 +22,7 @@ public class WaypointModule extends SimpleModule {
         super(plugin);
         this.repository = plugin.getRepositories().getWaypointRepository();
         this.trackController = new WaypointTrackControllerImpl(plugin);
-;   }
+   }
 
     @Override
     public void onEnable() {

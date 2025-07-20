@@ -31,7 +31,7 @@ tasks {
 
 paper {
     name = "KomanoCore"
-    description = "Quality of life stuff for a chill Survival server"
+    description = "Quality of life stuff for a chill Survival Minecraft server"
     main = "me.carlux.komanocore.PaperPlugin"
     version = "1.0.0"
     author = "JustCarluX"
