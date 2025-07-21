@@ -97,8 +97,8 @@ public class WaypointRepositoryImpl extends SimpleRepository<Long, Waypoint> imp
     }
 
     @Override
-    public Optional<Map<String, Boolean>> findCachedNamesByOwner(UUID owner) {
-        return Optional.ofNullable(this.waypointNameCache.get(owner));
+    public Collection<String> findCachedNamesByOwner(UUID owner) {
+        return this.waypointNameCache.getOrDefault(owner, Map.of()).keySet();
     }
 
     @Override

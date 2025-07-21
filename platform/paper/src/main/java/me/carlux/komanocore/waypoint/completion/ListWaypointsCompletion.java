@@ -5,9 +5,6 @@ import me.carlux.komanocore.api.waypoint.WaypointRepository;
 import me.carlux.komanocore.completion.PluginCommandCompletion;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 public class ListWaypointsCompletion extends PluginCommandCompletion {
 
@@ -19,9 +16,7 @@ public class ListWaypointsCompletion extends PluginCommandCompletion {
 
     @Override
     public Collection<String> handle(BukkitCommandCompletionContext context) {
-        final Optional<Map<String, Boolean>> cachedNames = this.repository.findCachedNamesByOwner(context.getPlayer().getUniqueId());
-        if (cachedNames.isEmpty()) return List.of();
-        return cachedNames.get().keySet();
+        return this.repository.findCachedNamesByOwner(context.getPlayer().getUniqueId());
     }
 
 }
