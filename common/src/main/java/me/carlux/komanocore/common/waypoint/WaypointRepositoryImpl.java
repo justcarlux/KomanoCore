@@ -57,7 +57,7 @@ public class WaypointRepositoryImpl extends SimpleRepository<Long, Waypoint> imp
     }
 
     @Override
-    public CompletableFuture<List<ModelWithId<Long, Waypoint>>> findByOwner(UUID owner) {
+    public CompletableFuture<Collection<ModelWithId<Long, Waypoint>>> findByOwner(UUID owner) {
         return CompletableFuture.supplyAsync(() -> {
             final String sql = "SELECT id, name, owner, worldName, x, y, z FROM waypoints WHERE owner = ?";
             try (final Connection connection = this.dataSource.getConnection();
@@ -121,7 +121,7 @@ public class WaypointRepositoryImpl extends SimpleRepository<Long, Waypoint> imp
     }
 
     @Override
-    public CompletableFuture<List<ModelWithId<Long, Waypoint>>> findAll() {
+    public CompletableFuture<Collection<ModelWithId<Long, Waypoint>>> findAll() {
         return CompletableFuture.supplyAsync(() -> {
             final String sql = "SELECT id, name, owner, worldName, x, y, z FROM waypoints";
             try (final Connection connection = this.dataSource.getConnection();
