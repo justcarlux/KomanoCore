@@ -8,7 +8,7 @@ subprojects {
     apply(plugin = "java-library")
     apply(plugin = "com.gradleup.shadow")
 
-    group = "me.carlux"
+    group = "me.carlux.komanocore"
     version = "1.0.0-SNAPSHOT"
 
     repositories {
